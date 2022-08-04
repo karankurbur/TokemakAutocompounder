@@ -1,0 +1,23 @@
+{
+  "payload": {
+    "wallet": "0x84d2e9482f14534cfc3c9b1ad01c614863d53acc",
+    "cycle": 222,
+    "amount": "3238843133141934936",
+    "chainId": 1
+  },
+  "signature": {
+    "v": 27,
+    "r": "0x5b9615ca09679832a51903117e75bb38f544660e6efe8e0785728ac86ceb72ad",
+    "s": "0x6637221a3184c10d6761bbe07fc74d2764a149d4893bcf94fb3a08196ab661a1",
+    "msg": "0x5b9615ca09679832a51903117e75bb38f544660e6efe8e0785728ac86ceb72ad6637221a3184c10d6761bbe07fc74d2764a149d4893bcf94fb3a08196ab661a11b"
+  },
+  "summary": {
+    "cycleTotal": "270720710766711620",
+    "breakdown": [
+      {
+        "description": "gOHM",
+        "amount": "270720710766711620"
+      }
+    ]
+  }
+}

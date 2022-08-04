@@ -1,94 +1,38 @@
-import { task } from "hardhat/config";
+require("@nomiclabs/hardhat-waffle");
+require("@typechain/hardhat");
+require("@nomiclabs/hardhat-ethers");
 
-import { config as dotenvConfig } from "dotenv";
-import { resolve } from "path";
-dotenvConfig({ path: resolve(__dirname, "./.env") });
-
-import { HardhatUserConfig } from "hardhat/types";
-import { NetworkUserConfig } from "hardhat/types";
-
-import "@typechain/hardhat";
-import "@nomiclabs/hardhat-ethers";
-import "@nomiclabs/hardhat-waffle";
-
-import "hardhat-gas-reporter";
-import "@nomiclabs/hardhat-etherscan";
-
-const chainIds = {
-  ganache: 1337,
-  goerli: 5,
-  hardhat: 31337,
-  kovan: 42,
-  mainnet: 1,
-  rinkeby: 4,
-  ropsten: 3,
-};
-
-const MNEMONIC = process.env.MNEMONIC || "";
-const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "";
-const INFURA_API_KEY = process.env.INFURA_API_KEY || "";
-const ALCHEMY_KEY = process.env.ALCHEMY_KEY || "";
-
-// This is a sample Hardhat task. To learn how to create your own go to
-// https://hardhat.org/guides/create-task.html
-task("accounts", "Prints the list of accounts", async (args, hre) => {
-  const accounts = await hre.ethers.getSigners();
-
-  for (const account of accounts) {
-    console.log(await account.getAddress());
-  }
-});
-
-function createTestnetConfig(network: keyof typeof chainIds): NetworkUserConfig {
-  const url: string = "https://" + network + ".infura.io/v3/" + INFURA_API_KEY;
-  return {
-    accounts: {
-      count: 10,
-      initialIndex: 0,
-      mnemonic: MNEMONIC,
-      path: "m/44'/60'/0'/0",
-    },
-    chainId: chainIds[network],
-    url,
-  };
-}
-
-// You need to export an object to set up your config
-// Go to https://hardhat.org/config/ to learn more
-
-const config: HardhatUserConfig = {
-  defaultNetwork: "hardhat",
-  networks: {
-    hardhat: {
-      accounts: {
-        mnemonic: MNEMONIC,
-      },
-      chainId: chainIds.hardhat,
-    },
-    mainnet: createTestnetConfig("mainnet"),
-    goerli: createTestnetConfig("goerli"),
-    kovan: createTestnetConfig("kovan"),
-    rinkeby: createTestnetConfig("rinkeby"),
-    ropsten: createTestnetConfig("ropsten"),
-  },
+const config = {
   solidity: {
     compilers: [
       {
-        version: "0.8.6",
+        version: "0.8.3",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 100,
+          },
+        },
+      },
+      {
+        version: "0.5.16",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 100,
+          },
+        },
       },
     ],
   },
-  etherscan: {
-    apiKey: ETHERSCAN_API_KEY,
-  },
-  gasReporter: {
-    currency: "USD",
-    gasPrice: 100,
-    // enabled: process.env.REPORT_GAS ? true : false,
-  },
-  typechain: {
-    outDir: "typechain",
-    target: "ethers-v5",
+  networks: {
+    hardhat: {
+      forking: {
+        url: "https://eth-mainnet.alchemyapi.io/v2/voz9wcaKXWS4zfPFdoZWJVsje8FXb_sG",
+        blockNumber: 15264976,
+      },
+      chainId: 1,
+    },
   },
 };
 

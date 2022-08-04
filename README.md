@@ -1,70 +1,41 @@
-# Solidity Template
+# Solidity Coding Challenge — Ondo Finance
 
-This is a basic hardhat template to get you started writing and compiling contract.
-The template is configured with some sensible defaults but tries to stay minimal.
-Many more plugins are available in the hardhat ecosystem, add them as you go.
+## Overview
 
-Uses
+The goal of this coding challenge is to write a simple smart contract that auto-compounds the rewards from Tokemak's UNI LP token pool to maximize yield.
 
-- [Hardhat](https://github.com/nomiclabs/hardhat): compile and run the smart contracts on a local development network
-- [TypeChain](https://github.com/ethereum-ts/TypeChain): generate TypeScript types for smart contracts
-- [Ethers](https://github.com/ethers-io/ethers.js/): renowned Ethereum library and wallet implementation
-- [Waffle](https://github.com/EthWorks/Waffle): tooling for writing comprehensive smart contract tests
-- [Solhint](https://github.com/protofire/solhint): linter
-- [Prettier Plugin Solidity](https://github.com/prettier-solidity/prettier-plugin-solidity): code formatter
+> **_We don't expect you to be familiar with any of the tools below. We're hoping to give you a preview of our tech stack and day-to-day tasks, while assessing your ability to pick up new concepts and tools on the go._**
 
-This is a GitHub template, which means you can reuse it as many times as you want. You can do that by clicking the "Use this
-template" button at the top of the page.
+## Instructions
 
-## Usage
+### Context
 
-### Pre Requisites
+[Tokemak](https://www.tokemak.xyz) incentivizes users providing `TOKE-ETH` liquidity in its [UNI LP token pool](https://v2.info.uniswap.org/pair/0x5fa464cefe8901d66c09b85d5fcdc55b3738c688).
 
-Before running any command, make sure to install dependencies:
+Refer to Tokemak's documentation on their smart contracts [here](https://docs.tokemak.xyz/protocol-information/contract-interactions).
 
-```sh
-$ yarn install
-```
+### Task
 
-### Compile
+1. Write a simple smart contract that satisfies the following functionality:
 
-Compile the smart contracts with Hardhat:
+- **Deposits**
+  - The contract should only accept deposits from a single, pre-determined user (you).
+  - The contract should only accept deposits of `TOKE-ETH` Uniswap V2 LP tokens.
+  - The contract should always stake all its deposits in Tokemak's UNI LP token pool.
+- **Auto-compounding**
+  - The contract should auto-compound Tokemak's staking rewards (with a function call).
+  - "Auto-compound" means claiming any outstanding rewards from Tokemak, converting them into more `TOKE-ETH` Uniswap V2 LP tokens, and staking them as well.
+- **Withdrawals**
+  - The contract should only accept withdrawals to a single, pre-determined user (you).
+  - The contract should only process withdrawals in TOKE-ETH Uniswap V2 LP tokens.
 
-```sh
-$ yarn compile
-```
+2. Submit your source code to this repository.
 
-### Test
+> **_Please don't publish this coding challenge or your solution. We're hoping to avoid plagiarism in the future. Thank you!_**
 
-Run the Mocha tests:
+## Hints & Suggestions
 
-```sh
-$ yarn test
-```
+- Write this contract as if you were writing production code: pay attention to testing, security, readability, and so on.
+- For inspiration, feel free to take a look at the smart contracts for our strategies [here](https://github.com/ondoprotocol/ondo-protocol/tree/main/contracts/strategies) and reuse any of the code (optional). Note that our contracts implement substantially more functionality, which you are _not_ required to do.
 
-### Deploy contract to netowrk (requires Mnemonic and infura API key)
-
-```
-npx hardhat run --network rinkeby ./scripts/deploy.ts
-```
-
-### Validate a contract with etherscan (requires API ke)
-
-```
-npx hardhat verify --network <network> <DEPLOYED_CONTRACT_ADDRESS> "Constructor argument 1"
-```
-
-### Added plugins
-
-- Gas reporter [hardhat-gas-reporter](https://hardhat.org/plugins/hardhat-gas-reporter.html)
-- Etherscan [hardhat-etherscan](https://hardhat.org/plugins/nomiclabs-hardhat-etherscan.html)
-
-## Thanks
-
-If you like it than you shoulda put a start ⭐ on it
-
-Twitter: [@amanusk\_][https://twitter.com/amanusk_]
-
-## License
-
-MIT
+> **_Let us know if you need any clarifications. If you're not able to complete the entire challenge, please submit a partial solution. Best of luck!_**
